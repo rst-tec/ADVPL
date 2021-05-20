@@ -1,2 +1,2 @@
-# Relátorios em ADVPL linguanguem do Protheus da Totvs.
+# Relátorios em ADVPL para Protheus da Totvs.
 
