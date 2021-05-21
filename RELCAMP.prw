@@ -3,7 +3,7 @@
 #INCLUDE "Protheus.ch"
 #INCLUDE "TBICONN.CH"
 
-// Exemplo de relÃ¡torio usando tReport com uma Section
+// Exemplo de relatório usando tReport com uma Section
 
 User Function RELCAMP()
 oReport:=ReportDef()
@@ -12,7 +12,7 @@ oReport:PrintDialog()
 Return
 
 //+-----------------------------------------------------------------------------------------------+
-//! Rotina para montagem dos dados do relÃ¡torio. !
+//! Rotina para montagem dos dados do relatório. !
 //+-----------------------------------------------------------------------------------------------+
 Static Function ReportPrint(oReport,cAlias)
 
@@ -31,23 +31,13 @@ AND C5_EMISSAO  BETWEEN %Exp:DtoS(MV_PAR01)% AND %Exp:DtoS(MV_PAR02)%
 AND C6_CLI      BETWEEN %Exp:MV_PAR03% AND %Exp:MV_PAR04%
 AND C5_VEND1    BETWEEN %Exp:MV_PAR05% AND %Exp:MV_PAR06%
 AND C6_PRODUTO  BETWEEN %Exp:MV_PAR07% AND %Exp:MV_PAR08%
-/*
-AND C6_NOTA = ' '
-AND C6_NUMLOTE = ' '
-AND C6_FILIAL = '01'
-AND C6_BLQ <> 'R'
-AND C6_NUM = C5_NUM
-AND C6_PRODUTO = B1_COD
-AND SUBSTRING (C6_PRODUTO,5,4) = W9_COD
-AND C5_VEND1 = A3_COD
-*/
 ORDER BY C6_NUM, C6_ITEM
 EndSQL
 
 IF(RAT(".prt", oreport:cfile) > 0)
-//alert("ImpressÃ£o via .prt")
+//alert("Impressão via .prt")
 ELSEIF(RAT(".xml", oreport:cfile) > 0)
-//alert("ImpressÃ£o via .xml")
+//alert("Impressão via .xml")
 ENDIF
 
 oSecao1:EndQuery()
@@ -57,20 +47,20 @@ oSecao1:Print()
 return
 
 //+-----------------------------------------------------------------------------------------------+
-//! FunÃ§Ã£o para criaÃ§Ã£o da estrutura do relatÃ³rio. !
+//! Função para criação da estrutura do relatório. !
 //+-----------------------------------------------------------------------------------------------+
 Static Function ReportDef(cAlias, cPerg)
 local cPerg := PadR("PVABERTO",10)
-local cTitle := "RelÃ¡torio campanha de vendas"
-local cHelp := "Permite gerar um relÃ¡torio de campanha de vendas"
+local cTitle := "Relatório campanha de vendas"
+local cHelp := "Permite gerar um relatório de campanha de vendas"
 local oReport
 local oSection1
 local cAlias := getNextAlias()
 
 oReport := TReport():New('RELCAMP',cTitle,cPerg,{|oReport|ReportPrint(oReport,cAlias)},cHelp)
 
-//Primeira sessÃ£o
-oSection1 := TRSection():New(oReport,"RelÃ¡torio campanha de vendas",{cAlias})
+//Primeira sessão
+oSection1 := TRSection():New(oReport,"Relatório campanha de vendas",{cAlias})
 
 ocell:= TRCell():New(oSection1,"C6_NUM",        cAlias, "Pedido")
 ocell:= TRCell():New(oSection1,"C6_ITEM",       cAlias, "Item")
@@ -81,16 +71,5 @@ ocell:= TRCell():New(oSection1,"C6_PRODUTO",    cAlias, "Produto")
 ocell:= TRCell():New(oSection1,"B1_DESC",       cAlias, "Descr.")
 ocell:= TRCell():New(oSection1,"C6_QTDVEN",     cAlias, "Quant.")
 ocell:= TRCell():New(oSection1,"C6_PRCVEN",     cAlias, "Unit.")
-
-/*
-ocell:= TRCell():New(oSection1,"C6_ENTREG",     cAlias, "Entrega")
-ocell:= TRCell():New(oSection1,"C6_CLI",        cAlias, "Cliente")
-ocell:= TRCell():New(oSection1,"C6_LOJA",       cAlias, "Loja")
-ocell:= TRCell():New(oSection1,"NOME",          cAlias, "Nome")
-ocell:= TRCell():New(oSection1,"W9_DESC",       cAlias, "Cor")
-ocell:= TRCell():New(oSection1,"C6_VALOR",      cAlias, "Total")
-ocell:= TRCell():New(oSection1,"C5_OCORREN",    cAlias, "Ocor.")
-ocell:= TRCell():New(oSection1,"DESCRICAO",     cAlias, "Descr.")
-*/
 
 Return(oReport)
