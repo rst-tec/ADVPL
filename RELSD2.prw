@@ -4,6 +4,10 @@
 // RELATORIO COM 2 SEÇÕES
 // CONTEM PERGUNTAS
 
+//Relatório de campanha de vendas
+//Desenvolvido por: Raphael Silva
+//Data: 19/08/2020
+
 user function RELSD2()
 
 	Local oReport   := Nil

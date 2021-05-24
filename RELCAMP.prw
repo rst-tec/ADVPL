@@ -3,7 +3,9 @@
 #INCLUDE "Protheus.ch"
 #INCLUDE "TBICONN.CH"
 
-// Exemplo de relatório usando tReport com uma Section
+//Relatório de campanha de vendas
+//Desenvolvido por: Raphael Silva
+//Data: 24/05/2021
 
 User Function RELCAMP()
 oReport:=ReportDef()
