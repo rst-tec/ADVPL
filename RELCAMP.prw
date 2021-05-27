@@ -3,9 +3,13 @@
 #INCLUDE "Protheus.ch"
 #INCLUDE "TBICONN.CH"
 
-//Relatório de campanha de vendas
-//Desenvolvido por: Raphael Silva
-//Data: 24/05/2021
+//+------------+------------+--------+--------------------------------------------+
+//| Função:    | RELCAMP    | Data   | 24/05/2021                                 | 
+//+------------+------------+--------+--------------------------------------------+
+//| Autor:     | Raphael Silva                                                    | 
+//+------------+------------+--------+--------------------------------------------+
+//| Descrição: | Relatório de campanha de vendas                                  |
+//+------------+------------+--------+--------------------------------------------+
 
 User Function RELCAMP()
 oReport:=ReportDef()
