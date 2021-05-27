@@ -27,7 +27,7 @@ User Function xFormula()
 	BEGIN SEQUENCE
 	
 		//-> Construção da interface.
-		oDlg1Frm := MSDialog():New( 091, 232, 225, 574, "SigaMDI.net | Fórmulas" ,,, .F.,,,,,, .T.,,, .T. )
+		oDlg1Frm := MSDialog():New( 091, 232, 225, 574, "Execute seu programa" ,,, .F.,,,,,, .T.,,, .T. )
 		
 		//-> Rótulo. 
 		oSay1Frm := TSay():New( 008 ,008 ,{ || "Informe a sua função aqui:" } ,oDlg1Frm ,,,.F. ,.F. ,.F. ,.T. ,CLR_BLACK ,CLR_WHITE ,084 ,008 )
