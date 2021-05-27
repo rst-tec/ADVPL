@@ -28,7 +28,7 @@ oSecao1:BeginQuery()
 
 BeginSQL Alias cAlias
 SELECT SC5.C5_EMISSAO, SC5.C5_NUM, SC5.C5_VEND1,
-SC6.C6_NUM, SC6.C6_PRODUTO, SC6.C6_QTDVEN, SC6.C6_PRCVEN, SC6.C6_VALOR, SC6.C6_NOTA,
+SC6.C6_NUM, SC6.C6_PRODUTO, SB1.B1_DESC, SC6.C6_QTDVEN, SC6.C6_PRCVEN, SC6.C6_VALOR, SC6.C6_NOTA,
 
 (SELECT COUNT(*) FROM SE1010 SE1 WHERE SE1.D_E_L_E_T_ <> '*' AND SC6.C6_NOTA = SE1.E1_NUM AND SE1.E1_TIPO = 'NF') AS PARCELAS,
 
@@ -101,6 +101,7 @@ ocell:= TRCell():New(oSection1,"C5_EMISSAO", cAlias, "Emissao")
 ocell:= TRCell():New(oSection1,"C5_NUM", cAlias, "Pedido")
 ocell:= TRCell():New(oSection1,"C5_VEND1", cAlias, "Vend.")
 ocell:= TRCell():New(oSection1,"C6_PRODUTO", cAlias, "Produto")
+ocell:= TRCell():New(oSection1,"B1_DESC", cAlias, "Descrição")
 ocell:= TRCell():New(oSection1,"C6_QTDVEN", cAlias, "Quant.")
 ocell:= TRCell():New(oSection1,"C6_PRCVEN", cAlias, "Unit.")
 ocell:= TRCell():New(oSection1,"C6_VALOR", cAlias, "Total")
