@@ -1,12 +1,15 @@
 #Include 'Protheus.ch'
 #include 'TopConn.CH'
 
+//+------------+------------+--------+--------------------------------------------+
+//| Função:    | RELSD2     | Autor: | Raphael Silva                              | 
+//+------------+------------+--------+--------------------------------------------+
+//| Descrição: | Relatorio Itens das Notas com lote e sublote                     |
+//+------------+------------------------------------------------------------------+
+//| Data:      | 19/08/2020                                                       | 
+//+-------------------------------------------------------------------------------+
 // RELATORIO COM 2 SEÇÕES
 // CONTEM PERGUNTAS
-
-//Relatório de campanha de vendas
-//Desenvolvido por: Raphael Silva
-//Data: 19/08/2020
 
 user function RELSD2()
 

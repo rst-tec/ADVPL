@@ -1,9 +1,13 @@
 #Include 'Protheus.ch'
 #include 'TopConn.CH'
 
-//GATILHO PARA PREENCHIMENTO DO CAMPO B1_GRUPO
-//Desenvolvido por: Raphael Silva
-//Data: 15/09/2020
+//+------------+------------+--------+--------------------------------------------+
+//| Função:    | SB1GRUPO   | Autor: | Raphael Silva                              | 
+//+------------+------------+--------+--------------------------------------------+
+//| Descrição: | GATILHO PARA PREENCHIMENTO DO CAMPO B1_GRUPO                     |
+//+------------+------------------------------------------------------------------+
+//| Data:      | 15/09/2020                                                       | 
+//+-------------------------------------------------------------------------------+
 
 user function SB1GRUPO()
 
