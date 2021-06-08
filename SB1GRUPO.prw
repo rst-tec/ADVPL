@@ -4,12 +4,12 @@
 //+------------+------------+--------+--------------------------------------------+
 //| Função:    | SB1GRUPO   | Autor: | Raphael Silva                              | 
 //+------------+------------+--------+--------------------------------------------+
-//| Descrição: | GATILHO PARA PREENCHIMENTO DO CAMPO B1_GRUPO                     |
+//| Descrição: | Gatilho para preenchimento do campo B1_GRUPO                     |
 //+------------+------------------------------------------------------------------+
 //| Data:      | 15/09/2020                                                       | 
 //+-------------------------------------------------------------------------------+
 
-user function SB1GRUPO()
+  user function SB1GRUPO()
 
     Local cLinha    := AllTrim(M->B1_LINHA)
     Local cEstampa  := AllTrim(M->B1_ESTAMPA)
