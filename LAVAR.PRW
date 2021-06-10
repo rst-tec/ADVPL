@@ -93,7 +93,7 @@ DEFINE MSDIALOG oDlg TITLE "Lavagem de Pano Cru" FROM 000, 000  TO 300, 480 COLO
     @ 061, 133 MSGET oCor VAR cCor SIZE 061, 010 OF oDlg COLORS 0, 16777215 PIXEL WHEN .F.
 
     //ADICIONADO
-    @ 090, 025 SAY oSay2 PROMPT "Data:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
+    @ 090, 020 SAY oSay2 PROMPT "Data:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
     @ 086, 039 MSGET oData VAR dData SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL //CRIAR CAMPO PARA DATA DE LAVAGEM
   
     @ 120, 015 BUTTON Baixar PROMPT "Lavar" SIZE 050, 024 OF oDlg PIXEL Action U_LAVAR2()
@@ -156,15 +156,15 @@ endif
 
 
 	
-nOpcao := Aviso("Informar Pre-Fixação!","Grava Pre-fixacao do Pano Cru ?", {"Sim","Nao"}, 1, "")
+nOpcao := Aviso("Informar Lavagem!","Grava Lavagem do Pano Cru ?", {"Sim","Nao"}, 1, "")
 
 if nOpcao = 1
 
 	dbSelectArea("SZ1")
 	
 	Reclock("SZ1", .F.)
-	SZ1->Z1_PREFIXA	:= "S"         // ALTERAR PARA O CAMPO DE DATA NOVO
-	SZ1->Z1_DTPREFI	:= dDataBase   // ALTERAR PARA O CAMPO DE DATA NOVO
+	SZ1->Z1_PREFIXA	:= "S"     // ALTERAR PARA O CAMPO DE DATA NOVO
+	SZ1->Z1_DTPREFI	:= dData   // ALTERAR PARA O CAMPO DE DATA NOVO
 	MsUnlock()
 
 	Msginfo("Informação de lavagem gravada com sucesso!")   
