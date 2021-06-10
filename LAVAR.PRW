@@ -1,14 +1,13 @@
 #Include "PROTHEUS.CH"
-//--------------------------------------------------------------
-/*/{Protheus.doc} MyFunction
-Description
 
-@param xParam Parameter Description
-@return xRet Return Description
-@author  -
-@since 12/3/2014
-/*/
-//--------------------------------------------------------------
+//+------------+------------+--------+--------------------------------------------+
+//| Função:    | LAVAR      | Data   | 10/06/2021                                 | 
+//+------------+------------+--------+--------------------------------------------+
+//| Autor:     | Raphael Silva                                                    | 
+//+------------+------------+--------+--------------------------------------------+
+//| Descrição: | Tela para informar tecido  lavado                                |
+//+------------+------------+--------+--------------------------------------------+
+
 User Function LAVAR()
 
 Local oGroup1
@@ -92,9 +91,13 @@ DEFINE MSDIALOG oDlg TITLE "Lavagem de Pano Cru" FROM 000, 000  TO 300, 480 COLO
     
     @ 065, 119 SAY oSay11 PROMPT "Cor:" SIZE 024, 007 OF oDlg COLORS 0, 16777215 PIXEL
     @ 061, 133 MSGET oCor VAR cCor SIZE 061, 010 OF oDlg COLORS 0, 16777215 PIXEL WHEN .F.
+
+    //ADICIONADO
+    @ 090, 025 SAY oSay2 PROMPT "Data:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
+    @ 086, 039 MSGET oData VAR dData SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL //CRIAR CAMPO PARA DATA DE LAVAGEM
   
-    @ 100, 015 BUTTON Baixar PROMPT "Lavar" SIZE 050, 024 OF oDlg PIXEL Action U_LAVAR2()
-    @ 100, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
+    @ 120, 015 BUTTON Baixar PROMPT "Lavar" SIZE 050, 024 OF oDlg PIXEL Action U_LAVAR2()
+    @ 120, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
 
   	ACTIVATE MSDIALOG oDlg CENTERED  
   
