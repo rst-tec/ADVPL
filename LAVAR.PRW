@@ -32,7 +32,8 @@ User Function LAVAR()
 
 	Private Baixar
 	Private oData
-	Private dData := Date()
+	//Private dData := Date() traz a data base
+	Private dData := stod("") 
 	Private oMetros
 	Private nMetros := 0
 	Private oCor
@@ -66,7 +67,6 @@ User Function LAVAR()
 	Private nPerda		:= 0
 
 	Private cLotePeca   := ""
-
 
 	DEFINE MSDIALOG oDlg TITLE "Lavagem de Pano Cru" FROM 000, 000  TO 300, 480 COLORS 0, 16777215 PIXEL
 
@@ -124,21 +124,24 @@ User Function LAVAR1()
 		cVar       := SZ1->Z1_VARIANT
 		nMetros    := SZ1->Z1_MTCRU
 		nPeso      := SZ1->Z1_PESOCRU
-		cSetor	  := SZ1->Z1_SETOR
+		cSetor	   := SZ1->Z1_SETOR
 	else
 		MsgAlert("Peça não encontrada!","Atenção !!!")
 		lStatus := .F.
 		Return(.F.)
 	endif
 
-// ALTERAR PARA O CAMPO DE DATA NOVO
-
-	if SZ1->Z1_PREFIXA = "S"
-		MsgInfo("Atenção !!! Peça já foi lavada dia " + DtoC(SZ1->Z1_DTPREFI)) // ALTERAR PARA O CAMPO DE DATA NOVO
+	/*
+   if SZ1->Z1_PREFIXA = "S" 
+		MsgInfo("Atenção !!! Peça já foi lavada dia " + DtoC(SZ1->Z1_DTPREFI)) 
 		Return(.F.)
 	endif
+   */
 
-//cLotePeca := iif ( Empty(cCortePeca) , cNumPeca, cNumPeca+"-"+cCortePeca )
+   if SZ1->Z1_LAVADO = "S" 
+		MsgInfo("Atenção !!! Peça já foi lavada dia " + DtoC(SZ1->Z1_DTLAVAD))
+		Return(.F.)
+	endif
 
 Return (.T.)
 //===================================================================================================
@@ -158,21 +161,28 @@ User Function LAVAR2()
 		Return(.F.)
 	endif
 
-	nOpcao := Aviso("Confirmar Lavagem!","Confirma Lavagem do Pano Cru ?", {"Sim","Nao"}, 1, "")
+	if Empty(dData)
+		MsgInfo("Digite a data que o tecido foi lavado!")
+		Return(.F.)
+	endif
+
+	nOpcao := Aviso("Confirmar tecido lavado!","Confirma tecido lavado?", {"Sim","Nao"}, 1, "")
 
 	if nOpcao = 1
 
 		dbSelectArea("SZ1")
 
 		Reclock("SZ1", .F.)
-		SZ1->Z1_PREFIXA	:= "S"     // ALTERAR PARA O CAMPO DE DATA NOVO
-		SZ1->Z1_DTPREFI	:= dData   // ALTERAR PARA O CAMPO DE DATA NOVO
+		//SZ1->Z1_PREFIXA	:= "S"     // ALTERAR PARA O CAMPO DE DATA NOVO
+		//SZ1->Z1_DTPREFI	:= dData   // ALTERAR PARA O CAMPO DE DATA NOVO
+
+      	SZ1->Z1_LAVADO	:= "S"     
+		SZ1->Z1_DTLAVAD	:= dData   
 		MsUnlock()
 
-		Msginfo("Informação de lavagem gravada com sucesso!")
+		Msginfo("Informação de tecido lavado, gravada com sucesso!")
 
 	endif
-
 
 	oDLG:End()
 
