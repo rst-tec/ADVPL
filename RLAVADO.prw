@@ -4,14 +4,14 @@
 #INCLUDE "TBICONN.CH"
 
 //+------------+------------+--------+--------------------------------------------+
-//| Função:    | RELLAVADO  | Data   | 10/06/2021                                 | 
+//| Função:    | RLAVADO    | Data   | 10/06/2021                                 | 
 //+------------+------------+--------+--------------------------------------------+
 //| Autor:     | Raphael Silva                                                    | 
 //+------------+------------+--------+--------------------------------------------+
 //| Descrição: | Relatório de tecido lavado e ou prefixado                        |
 //+------------+------------+--------+--------------------------------------------+
 
-User Function RELLAVADO()
+User Function RLAVADO()
 oReport:=ReportDef()
 oReport:SetTotalInLine(.F.)
 oReport:PrintDialog()
@@ -58,7 +58,7 @@ local oReport
 local oSection1
 local cAlias := getNextAlias()
 
-oReport := TReport():New('RELFIXA',cTitle,cPerg,{|oReport|ReportPrint(oReport,cAlias)},cHelp)
+oReport := TReport():New('RLAVADO',cTitle,cPerg,{|oReport|ReportPrint(oReport,cAlias)},cHelp)
 
 //oReport:SetPortrait() //Definindo a orientação como retrato
 //oReport:SetLandscape()//Definindo a orientação como paisagem
@@ -66,8 +66,6 @@ oReport := TReport():New('RELFIXA',cTitle,cPerg,{|oReport|ReportPrint(oReport,cA
 //Primeira sessão
 oSection1 := TRSection():New(oReport,"Relatório de tecido lavado e ou prefixado",{cAlias})
 
-//ocell:= TRCell():New(oSection1,"Z1_DTINIFB", cAlias, "DT inicio")
-//ocell:= TRCell():New(oSection1,"Z1_FABRICA", cAlias, "DT Fim")
 ocell:= TRCell():New(oSection1,"Z1_CODPROD", cAlias, "Artigo")
 ocell:= TRCell():New(oSection1,"Z1_DESCRIC", cAlias, "Descrição")
 ocell:= TRCell():New(oSection1,"Z1_COR", cAlias, "Cor")
