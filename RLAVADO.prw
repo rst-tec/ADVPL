@@ -8,7 +8,7 @@
 //+------------+------------+--------+--------------------------------------------+
 //| Autor:     | Raphael Silva                                                    | 
 //+------------+------------+--------+--------------------------------------------+
-//| Descrição: | Relatório de tecido lavado e ou prefixado                        |
+//| Descrição: | Relatório de tecido lavado e ou pré-fixado                       |
 //+------------+------------+--------+--------------------------------------------+
 
 User Function RLAVADO()
@@ -27,12 +27,13 @@ local oSecao1 := oReport:Section(1)
 oSecao1:BeginQuery()
 
 BeginSQL Alias cAlias
-SELECT Z1_CODPROD, Z1_DESCRIC, Z1_COR, Z1_DCOR, Z1_ESTAMP, Z1_VARIANT, Z1_MTCRU, Z1_PESOCRU, Z1_SETOR, Z1_PREFIXA, Z1_DTPREFI, Z1_LAVADO, Z1_DTLAVAD
+SELECT Z1_CODPROD, Z1_DESCRIC, Z1_COR, Z1_DCOR, Z1_NOPECA, Z1_MTCRU, Z1_PESOCRU, Z1_SETOR, Z1_PREFIXA, Z1_DTPREFI, Z1_LAVADO, Z1_DTLAVAD
 FROM SZ1010
-WHERE SZ1010.D_E_L_E_T_ <> '*'  
-AND Z1_DTPREFI BETWEEN '20210501' AND '20210630' // ALTERAR PARA PARAMETROS
-OR Z1_DTLAVAD BETWEEN '20210601' AND '20210630'
-ORDER BY Z1_DTPREFI
+WHERE SZ1010.D_E_L_E_T_ <> '*' 
+AND Z1_CODPROD  BETWEEN %Exp:MV_PAR01% AND %Exp:MV_PAR02%
+AND (  Z1_DTPREFI  BETWEEN %Exp:DtoS(MV_PAR03)% AND %Exp:DtoS(MV_PAR04)% 
+    OR Z1_DTLAVAD BETWEEN %Exp:DtoS(MV_PAR03)% AND %Exp:DtoS(MV_PAR04)%)
+ORDER BY Z1_CODPROD, Z1_DTPREFI
 EndSQL
 
 IF(RAT(".prt", oreport:cfile) > 0)
@@ -51,9 +52,9 @@ return
 //! Função para criação da estrutura do relatório. !
 //+-----------------------------------------------------------------------------------------------+
 Static Function ReportDef(cAlias, cPerg)
-//local cPerg := PadR("PVABERTO",10)
-local cTitle := "Relatório de tecido lavado e ou prefixado "
-local cHelp := "Relatório de tecido lavado e ou prefixado "
+local cPerg := PadR("RLAVADO",10)
+local cTitle := "Relatório de tecido lavado e ou pré-fixado"
+local cHelp := "Relatório de tecido lavado e ou pré-fixado"
 local oReport
 local oSection1
 local cAlias := getNextAlias()
@@ -70,8 +71,7 @@ ocell:= TRCell():New(oSection1,"Z1_CODPROD", cAlias, "Artigo")
 ocell:= TRCell():New(oSection1,"Z1_DESCRIC", cAlias, "Descrição")
 ocell:= TRCell():New(oSection1,"Z1_COR", cAlias, "Cor")
 ocell:= TRCell():New(oSection1,"Z1_DCOR", cAlias, "Descrição")
-ocell:= TRCell():New(oSection1,"Z1_ESTAMP", cAlias, "Estampa")
-ocell:= TRCell():New(oSection1,"Z1_VARIANT", cAlias, "Variante")
+ocell:= TRCell():New(oSection1,"Z1_NOPECA", cAlias, "Peça")
 ocell:= TRCell():New(oSection1,"Z1_MTCRU", cAlias, "Metros")
 ocell:= TRCell():New(oSection1,"Z1_PESOCRU", cAlias, "Peso")
 ocell:= TRCell():New(oSection1,"Z1_SETOR", cAlias, "Setor")
