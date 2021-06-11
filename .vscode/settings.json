@@ -1,5 +1,6 @@
 {
     "totvsLanguageServer.welcomePage": false,
     "files.encoding": "windows1252",
-    "totvsLanguageServer.clearConsoleBeforeCompile": true
+    "totvsLanguageServer.clearConsoleBeforeCompile": true,
+    "files.autoSave": "afterDelay"
 }

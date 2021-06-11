@@ -166,7 +166,7 @@ User Function LAVAR2()
 		Return(.F.)
 	endif
 
-	nOpcao := Aviso("Confirmar tecido lavado!","Confirma tecido lavado?", {"Sim","Nao"}, 1, "")
+	nOpcao := Aviso("Confirmar","Confirma tecido lavado?", {"Sim","Nao"}, 1, "")
 
 	if nOpcao = 1
 

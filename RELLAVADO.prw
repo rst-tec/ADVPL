@@ -4,14 +4,14 @@
 #INCLUDE "TBICONN.CH"
 
 //+------------+------------+--------+--------------------------------------------+
-//| Função:    | RELFIXA    | Data   | 10/06/2021                                 | 
+//| Função:    | RELLAVADO  | Data   | 10/06/2021                                 | 
 //+------------+------------+--------+--------------------------------------------+
 //| Autor:     | Raphael Silva                                                    | 
 //+------------+------------+--------+--------------------------------------------+
 //| Descrição: | Relatório de tecido lavado e ou prefixado                        |
 //+------------+------------+--------+--------------------------------------------+
 
-User Function RELFIXA()
+User Function RELLAVADO()
 oReport:=ReportDef()
 oReport:SetTotalInLine(.F.)
 oReport:PrintDialog()
@@ -27,10 +27,11 @@ local oSecao1 := oReport:Section(1)
 oSecao1:BeginQuery()
 
 BeginSQL Alias cAlias
-SELECT Z1_DTINIFB, Z1_FABRICA, Z1_CODPROD, Z1_DESCRIC, Z1_COR, Z1_DCOR, Z1_ESTAMP, Z1_VARIANT, Z1_MTCRU, Z1_PESOCRU, Z1_SETOR, Z1_PREFIXA, Z1_DTPREFI
+SELECT Z1_CODPROD, Z1_DESCRIC, Z1_COR, Z1_DCOR, Z1_ESTAMP, Z1_VARIANT, Z1_MTCRU, Z1_PESOCRU, Z1_SETOR, Z1_PREFIXA, Z1_DTPREFI, Z1_LAVADO, Z1_DTLAVAD
 FROM SZ1010
 WHERE SZ1010.D_E_L_E_T_ <> '*'  
 AND Z1_DTPREFI BETWEEN '20210501' AND '20210630' // ALTERAR PARA PARAMETROS
+OR Z1_DTLAVAD BETWEEN '20210601' AND '20210630'
 ORDER BY Z1_DTPREFI
 EndSQL
 
@@ -65,8 +66,8 @@ oReport := TReport():New('RELFIXA',cTitle,cPerg,{|oReport|ReportPrint(oReport,cA
 //Primeira sessão
 oSection1 := TRSection():New(oReport,"Relatório de tecido lavado e ou prefixado",{cAlias})
 
-ocell:= TRCell():New(oSection1,"Z1_DTINIFB", cAlias, "DT inicio")
-ocell:= TRCell():New(oSection1,"Z1_FABRICA", cAlias, "DT Fim")
+//ocell:= TRCell():New(oSection1,"Z1_DTINIFB", cAlias, "DT inicio")
+//ocell:= TRCell():New(oSection1,"Z1_FABRICA", cAlias, "DT Fim")
 ocell:= TRCell():New(oSection1,"Z1_CODPROD", cAlias, "Artigo")
 ocell:= TRCell():New(oSection1,"Z1_DESCRIC", cAlias, "Descrição")
 ocell:= TRCell():New(oSection1,"Z1_COR", cAlias, "Cor")
@@ -78,5 +79,7 @@ ocell:= TRCell():New(oSection1,"Z1_PESOCRU", cAlias, "Peso")
 ocell:= TRCell():New(oSection1,"Z1_SETOR", cAlias, "Setor")
 ocell:= TRCell():New(oSection1,"Z1_PREFIXA", cAlias, "Prefixado")
 ocell:= TRCell():New(oSection1,"Z1_DTPREFI", cAlias, "DT Fixação")
+ocell:= TRCell():New(oSection1,"Z1_LAVADO", cAlias, "Lavado")
+ocell:= TRCell():New(oSection1,"Z1_DTLAVAD", cAlias, "DT Lavado")
 
 Return(oReport)
