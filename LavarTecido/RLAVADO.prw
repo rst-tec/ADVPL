@@ -40,7 +40,7 @@ IF(RAT(".prt", oreport:cfile) > 0)
 //alert("Impressão via .prt")
 ELSEIF(RAT(".xml", oreport:cfile) > 0)
 //alert("Impressão via .xml")
-ENDIF
+ENDIF    
 
 oSecao1:EndQuery()
 oReport:SetMeter((cAlias)->(RecCount()))
@@ -77,7 +77,13 @@ ocell:= TRCell():New(oSection1,"Z1_PESOCRU", cAlias, "Peso")
 ocell:= TRCell():New(oSection1,"Z1_SETOR", cAlias, "Setor")
 ocell:= TRCell():New(oSection1,"Z1_PREFIXA", cAlias, "Prefixado")
 ocell:= TRCell():New(oSection1,"Z1_DTPREFI", cAlias, "DT Fixação")
-ocell:= TRCell():New(oSection1,"Z1_LAVADO", cAlias, "Lavado")
-ocell:= TRCell():New(oSection1,"Z1_DTLAVAD", cAlias, "DT Lavado")
+ocell:= TRCell():New(oSection1,"Z1_LAVADO", cAlias, "Speroto")
+ocell:= TRCell():New(oSection1,"Z1_DTLAVAD", cAlias, "DT Speroto")
+
+//Totalizador
+    
+TRFunction():New(oSection1:Cell("Z1_PESOCRU"),"Total Pré-Fixado","SUM",,,,,.F.,.T.)
+
+TRFunction():New(oSection1:Cell("Z1_PESOCRU"),"Total Speroto","SUM",,,,,.F.,.T.)
 
 Return(oReport)
