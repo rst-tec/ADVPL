@@ -32,8 +32,8 @@ User Function ALTPESO()
 	private oFrete	
 	
 	private cpedido := space(6)	
-	private nLiquido:= space(1)	
-	private nBruto 	:= space(1)		
+	private nLiquido:= 0
+	private nBruto 	:= 0
 	private nVolume := space(1)		
 	private cEspecie:= space(1)	
 	private nFrete 	:= space(1)
@@ -48,10 +48,10 @@ User Function ALTPESO()
 
 	@ 025, 010 GROUP oGroup1 TO 080, 220 OF oDlg COLOR 0, 16777215 PIXEL
 	@ 035, 015 SAY oSay2 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 038 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
+	@ 031, 038 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
 	
 	@ 035, 105 SAY oSay3 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 133 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
+	@ 031, 133 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
 
 	@ 050, 015 SAY oSay4 PROMPT "Volume:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
@@ -88,21 +88,7 @@ User Function ALTPESO1()
 		MsgAlert("Pedido não encontrado!","Atenção !!!")
 		lStatus := .F.
 		Return(.F.)
-	endif
-
-	/*
-   if SC5->Z1_PREFIXA = "S" 
-		MsgInfo("Atenção !!! Peça já foi lavada dia " + DtoC(SC5->Z1_DTPREFI)) 
-		Return(.F.)
-	endif
-   */
-
-   if SC5->Z1_LAVADO = "S" 
-		MsgInfo("Atenção !!! Peça já foi lavada dia " + DtoC(SC5->Z1_DTLAVAD))
-		Return(.F.)
-	endif
-
-	
+	endif		
 
 Return (.T.)
 //===================================================================================================
@@ -117,15 +103,10 @@ User Function ALTPESO2()
 	Local cProduto    := ""
 	Local nOpcao	  := 0
 
-	if Empty(cNumPeca)
-		MsgInfo("Digite o número da Peça.")
+	if Empty(cpedido)
+		MsgInfo("Digite o número da Pedido.")
 		Return(.F.)
-	endif
-
-	if Empty(dData)
-		MsgInfo("Digite a data que o tecido foi lavado!")
-		Return(.F.)
-	endif
+	endif	
 
 	nOpcao := Aviso("Confirmar","Confirma tecido lavado?", {"Sim","Nao"}, 1, "")
 
