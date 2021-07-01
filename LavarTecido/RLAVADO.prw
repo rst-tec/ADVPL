@@ -65,7 +65,7 @@ oReport := TReport():New('RLAVADO',cTitle,cPerg,{|oReport|ReportPrint(oReport,cA
 //oReport:SetLandscape()//Definindo a orientação como paisagem
 
 //Primeira sessão
-oSection1 := TRSection():New(oReport,"Relatório de tecido lavado e ou prefixado",{cAlias})
+oSection1 := TRSection():New(oReport,"Relatório de tecido lavado Speroto e ou prefixado",{cAlias})
 
 ocell:= TRCell():New(oSection1,"Z1_CODPROD", cAlias, "Artigo")
 ocell:= TRCell():New(oSection1,"Z1_DESCRIC", cAlias, "Descrição")
@@ -82,8 +82,8 @@ ocell:= TRCell():New(oSection1,"Z1_DTLAVAD", cAlias, "DT Speroto")
 
 //Totalizador
     
-TRFunction():New(oSection1:Cell("Z1_PESOCRU"),"Total Pré-Fixado","SUM",,,,,.F.,.T.)
+TRFunction():New(oSection1:Cell("Z1_PESOCRU"),"Total Peso","SUM",,,,,.F.,.T.)
 
-TRFunction():New(oSection1:Cell("Z1_PESOCRU"),"Total Speroto","SUM",,,,,.F.,.T.)
+TRFunction():New(oSection1:Cell("Z1_MTCRU"),"Total Metros","SUM",,,,,.F.,.T.)
 
 Return(oReport)

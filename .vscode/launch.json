@@ -11,5 +11,17 @@
 			"isMultiSession": true,
 			"enableTableSync": true
 		}
-	]
+	],
+	"lastPrograms": [
+		{
+			"args": [],
+			"label": "U_RLAVADO",
+			"description": ""
+		},
+		{
+			"label": "SIGAADV",
+			"description": "<nil>"
+		}
+	],
+	"lastProgramExecuted": "SIGAADV"
 }
