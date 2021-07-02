@@ -25,33 +25,38 @@ User Function ALTPESO()
 	
 	Private oDlg
 	private oPedido
-	private oLiquido
-	private oBruto	
+	Private oData		
+	private oBruto
+	private oLiquido		
 	private oVolume
 	private oEspecie	
 	private oFrete	
 	
 	private cpedido := space(6)	
-	private nLiquido:= 0
+	Private dData 	:= stod("") 
 	private nBruto 	:= 0
+	private nLiquido:= 0	
 	private nVolume := space(1)		
 	private cEspecie:= space(1)	
 	private nFrete 	:= space(1)
-	Private Baixar
+	Private Alterar
 
-	DEFINE MSDIALOG oDlg TITLE "Alterar peso pedido" FROM 000, 000  TO 300, 480 COLORS 0, 16777215 PIXEL
+	DEFINE MSDIALOG oDlg TITLE "Alterar dados do pedido" FROM 000, 000  TO 300, 480 COLORS 0, 16777215 PIXEL
 
 //DEFINE MSDIALOG oDlg TITLE "New Dialog" FROM 000, 000  TO 500, 500 COLORS 0, 16777215 PIXEL
 
 	@ 014, 015 SAY oSay1 PROMPT "Pedido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 010, 039 MSGET oPedido VAR cpedido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL	Valid U_ALTPESO1() ==.T.
 
+	@ 014, 105 SAY oSay3 PROMPT "Emissao:" SIZE 037, 007 OF oDlg COLORS 0, 16777215 PIXEL
+	@ 010, 133 MSGET oData VAR dData SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL  WHEN .F.
+
 	@ 025, 010 GROUP oGroup1 TO 080, 220 OF oDlg COLOR 0, 16777215 PIXEL
-	@ 035, 015 SAY oSay2 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 038 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
+	@ 035, 015 SAY oSay2 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
+	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'	
 	
-	@ 035, 105 SAY oSay3 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 133 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
+	@ 035, 105 SAY oSay3 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
+	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
 
 	@ 050, 015 SAY oSay4 PROMPT "Volume:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
@@ -60,9 +65,9 @@ User Function ALTPESO()
 	@ 046, 133 MSGET oEspecie VAR cEspecie SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
 
 	@ 065, 015 SAY oSay6 PROMPT "Frete:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 061, 038 MSGET oFrete VAR nFrete SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 	
+	@ 061, 038 MSGET oFrete VAR nFrete SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 	WHEN .F.
 
-	@ 120, 015 BUTTON Baixar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_LAVAR2()
+	@ 120, 015 BUTTON Alterar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_ALTPESO2()
 	@ 120, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
 
 	ACTIVATE MSDIALOG oDlg CENTERED
@@ -78,7 +83,7 @@ User Function ALTPESO1()
 	dbGoTop()
 
 	if (dbSeek("01"+cpedido))	
-		cpedido   := SC5->C5_NUM
+		dData	  := SC5->C5_EMISSAO
 		nBruto    := SC5->C5_PBRUTO
 		nLiquido  := SC5->C5_PESOL
 		nVolume   := SC5->C5_VOLUME1
@@ -92,7 +97,7 @@ User Function ALTPESO1()
 
 Return (.T.)
 //===================================================================================================
-// BOTAO BAIXAR
+// BOTAO ALTERAR
 //===================================================================================================
 User Function ALTPESO2()
 
@@ -108,21 +113,21 @@ User Function ALTPESO2()
 		Return(.F.)
 	endif	
 
-	nOpcao := Aviso("Confirmar","Confirma tecido lavado?", {"Sim","Nao"}, 1, "")
+	nOpcao := Aviso("Confirmar","Confirma alterações do pedido?", {"Sim","Nao"}, 1, "")
 
 	if nOpcao = 1
 
 		dbSelectArea("SC5")
 
-		Reclock("SC5", .F.)
-		//SC5->Z1_PREFIXA	:= "S"     // ALTERAR PARA O CAMPO DE DATA NOVO
-		//SC5->Z1_DTPREFI	:= dData   // ALTERAR PARA O CAMPO DE DATA NOVO
-
-      	SC5->Z1_LAVADO	:= "S"     
-		SC5->Z1_DTLAVAD	:= dData   
+		Reclock("SC5", .F.) 
+		SC5->C5_PBRUTO  := nBruto
+		SC5->C5_PESOL	:= nLiquido
+		SC5->C5_VOLUME1	:= nVolume
+		SC5->C5_ESPECI1	:= cEspecie
+		//SC5->C5_TPFRETE := nFrete
 		MsUnlock()
 
-		Msginfo("Informação de tecido lavado, gravada com sucesso!")
+		Msginfo("Alterações, gravada com sucesso!")
 
 	endif
 
