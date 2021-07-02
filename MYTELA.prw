@@ -23,12 +23,12 @@ oSay1      := TSay():New( 020,064,{||"Programa para alterar dados do pedido de v
 oBtn1      := TButton():New( 016,020,"Executar",oGrp1,{||U_ALTPESO()},037,012,,,,.T.,,"",,,,.F. )
 
 oGrp2      := TGroup():New( 041,013,069,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
-oSay2      := TSay():New( 053,065,{||"Informe aqui os dados do seu programa - 2"},oGrp2,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
-oBtn2      := TButton():New( 049,021,"Executar",oGrp2,{||alert("Botão 02")},037,012,,,,.T.,,"",,,,.F. )
+oSay2      := TSay():New( 053,065,{||"Programa para informar data de lavagem de tecido na Speroto"},oGrp2,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
+oBtn2      := TButton():New( 049,021,"Executar",oGrp2,{||U_lavar()},037,012,,,,.T.,,"",,,,.F. )
 
 oGrp3      := TGroup():New( 077,013,105,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
-oSay3      := TSay():New( 089,065,{||"Informe aqui os dados do seu programa - 3"},oGrp3,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
-oBtn3      := TButton():New( 085,021,"Executar",oGrp3,{||alert("Botão 03")},037,012,,,,.T.,,"",,,,.F. )
+oSay3      := TSay():New( 089,065,{||"Programa para executar fonte em Desenvolvimento "},oGrp3,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
+oBtn3      := TButton():New( 085,021,"Executar",oGrp3,{||U_xFormula()},037,012,,,,.T.,,"",,,,.F. )
 
 oGrp4      := TGroup():New( 109,013,137,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
 oSay4      := TSay():New( 121,065,{||"Informe aqui os dados do seu programa - 4"},oGrp4,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
