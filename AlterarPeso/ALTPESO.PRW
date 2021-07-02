@@ -41,7 +41,7 @@ User Function ALTPESO()
 	private nFrete 	:= space(1)
 	Private Alterar
 
-	DEFINE MSDIALOG oDlg TITLE "Alterar dados do pedido" FROM 000, 000  TO 300, 480 COLORS 0, 16777215 PIXEL
+	DEFINE MSDIALOG oDlg TITLE "Alterar dados do pedido de venda" FROM 000, 000  TO 300, 480 COLORS 0, 16777215 PIXEL
 
 //DEFINE MSDIALOG oDlg TITLE "New Dialog" FROM 000, 000  TO 500, 500 COLORS 0, 16777215 PIXEL
 
@@ -53,13 +53,13 @@ User Function ALTPESO()
 
 	@ 025, 010 GROUP oGroup1 TO 080, 220 OF oDlg COLOR 0, 16777215 PIXEL
 	@ 035, 015 SAY oSay2 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'	
+	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'	
 	
 	@ 035, 105 SAY oSay3 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
+	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
 
 	@ 050, 015 SAY oSay4 PROMPT "Volume:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
+	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
 
 	@ 050, 105 SAY oSay5 PROMPT "Especie:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 046, 133 MSGET oEspecie VAR cEspecie SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
@@ -67,8 +67,8 @@ User Function ALTPESO()
 	@ 065, 015 SAY oSay6 PROMPT "Frete:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 061, 038 MSGET oFrete VAR nFrete SIZE 020, 010 OF oDlg COLORS 0, 16777215 PIXEL 	
 
-	@ 120, 015 BUTTON Alterar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_ALTPESO2()
-	@ 120, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
+	@ 100, 015 BUTTON Alterar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_ALTPESO2()
+	@ 100, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
 
 	ACTIVATE MSDIALOG oDlg CENTERED
 
@@ -112,7 +112,7 @@ User Function ALTPESO2()
 		Return(.F.)
 	endif	
 
-	nOpcao := Aviso("Confirmar","Confirma alterações do pedido?", {"Sim","Nao"}, 1, "")
+	nOpcao := Aviso("Confirmar","Confirma alterações no pedido de venda?", {"Sim","Nao"}, 1, "")
 
 	if nOpcao = 1
 
@@ -123,7 +123,7 @@ User Function ALTPESO2()
 		SC5->C5_PESOL	:= nLiquido
 		SC5->C5_VOLUME1	:= nVolume
 		SC5->C5_ESPECI1	:= cEspecie
-		//SC5->C5_TPFRETE := nFrete
+		SC5->C5_TPFRETE := nFrete
 		MsUnlock()
 
 		Msginfo("Alterações, gravada com sucesso!")
