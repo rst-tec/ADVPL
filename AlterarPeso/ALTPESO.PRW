@@ -36,8 +36,8 @@ User Function ALTPESO()
 	Private dData 	:= stod("") 
 	private nBruto 	:= 0
 	private nLiquido:= 0	
-	private nVolume := space(1)		
-	private cEspecie:= space(1)	
+	private nVolume := space(3)		
+	private cEspecie:= space(10)	
 	private nFrete 	:= space(1)
 	Private Alterar
 
@@ -59,13 +59,13 @@ User Function ALTPESO()
 	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
 
 	@ 050, 015 SAY oSay4 PROMPT "Volume:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
+	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.99'
 
 	@ 050, 105 SAY oSay5 PROMPT "Especie:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 046, 133 MSGET oEspecie VAR cEspecie SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
 
 	@ 065, 015 SAY oSay6 PROMPT "Frete:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 061, 038 MSGET oFrete VAR nFrete SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 	WHEN .F.
+	@ 061, 038 MSGET oFrete VAR nFrete SIZE 020, 010 OF oDlg COLORS 0, 16777215 PIXEL 	
 
 	@ 120, 015 BUTTON Alterar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_ALTPESO2()
 	@ 120, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
@@ -78,9 +78,13 @@ Return
 //================================================================================= 
 User Function ALTPESO1()
 
+	if Empty(cpedido)		
+		Return(.T.)
+	endif
+
 	dbSelectArea("SC5")
 	dbSetOrder(1)
-	dbGoTop()
+	dbGoTop()	
 
 	if (dbSeek("01"+cpedido))	
 		dData	  := SC5->C5_EMISSAO
@@ -88,12 +92,12 @@ User Function ALTPESO1()
 		nLiquido  := SC5->C5_PESOL
 		nVolume   := SC5->C5_VOLUME1
 		cEspecie  := SC5->C5_ESPECI1
-		nFrete    := SC5->C5_TPFRETE		
-	else
+		nFrete    := SC5->C5_TPFRETE				
+		else
 		MsgAlert("Pedido não encontrado!","Atenção !!!")
 		lStatus := .F.
 		Return(.F.)
-	endif		
+	endif	
 
 Return (.T.)
 //===================================================================================================
@@ -101,11 +105,6 @@ Return (.T.)
 //===================================================================================================
 User Function ALTPESO2()
 
-	Local lMsErroAuto := .F.
-	Local cMoviint    := {}
-	Local cTextAviso  := ""
-	Local nRet        := 0
-	Local cProduto    := ""
 	Local nOpcao	  := 0
 
 	if Empty(cpedido)
