@@ -12,31 +12,31 @@
 //+------------+------------+--------+--------------------------------------------+
 
 User Function ALTPESO()
-	
+
 	Local oGroup1
-	Local oSay1	
+	Local oSay1
 	Local oSay2
 	Local oSay3
 	Local oSay4
 	Local oSay5
-	Local oSay6	
+	Local oSay6
 	Local Sair
-	
+
 	Private oDlg
 	private oPedido
-	Private oData		
+	Private oData
 	private oBruto
-	private oLiquido		
+	private oLiquido
 	private oVolume
-	private oEspecie	
-	private oFrete	
-	
-	private cpedido := space(6)	
-	Private dData 	:= stod("") 
+	private oEspecie
+	private oFrete
+
+	private cpedido := space(6)
+	Private dData 	:= stod("")
 	private nBruto 	:= 0
-	private nLiquido:= 0	
-	private nVolume := space(3)		
-	private cEspecie:= space(10)	
+	private nLiquido:= 0
+	private nVolume := space(3)
+	private cEspecie:= space(10)
 	private nFrete 	:= space(1)
 	Private Alterar
 
@@ -52,8 +52,8 @@ User Function ALTPESO()
 
 	@ 025, 010 GROUP oGroup1 TO 080, 220 OF oDlg COLOR 0, 16777215 PIXEL
 	@ 035, 015 SAY oSay2 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'	
-	
+	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
+
 	@ 035, 105 SAY oSay3 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
 
@@ -61,10 +61,10 @@ User Function ALTPESO()
 	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
 
 	@ 050, 105 SAY oSay5 PROMPT "Especie:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 046, 133 MSGET oEspecie VAR cEspecie SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL 
+	@ 046, 133 MSGET oEspecie VAR cEspecie SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL
 
 	@ 065, 015 SAY oSay6 PROMPT "Frete:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 061, 038 MSGET oFrete VAR nFrete SIZE 020, 010 OF oDlg COLORS 0, 16777215 PIXEL 	
+	@ 061, 038 MSGET oFrete VAR nFrete SIZE 020, 010 OF oDlg COLORS 0, 16777215 PIXEL
 
 	@ 100, 015 BUTTON Alterar PROMPT "Alterar" SIZE 050, 024 OF oDlg PIXEL Action U_ALTPESO2()
 	@ 100, 165 BUTTON Sair PROMPT "Sair" SIZE 050, 026 OF oDlg PIXEL Action oDlg:End()
@@ -77,26 +77,26 @@ Return
 //================================================================================= 
 User Function ALTPESO1()
 
-	if Empty(cpedido)		
+	if Empty(cpedido)
 		Return(.T.)
 	endif
 
 	dbSelectArea("SC5")
 	dbSetOrder(1)
-	dbGoTop()	
+	dbGoTop()
 
-	if (dbSeek("01"+cpedido))	
+	if (dbSeek("01"+cpedido))
 		dData	  := SC5->C5_EMISSAO
 		nBruto    := SC5->C5_PBRUTO
 		nLiquido  := SC5->C5_PESOL
 		nVolume   := SC5->C5_VOLUME1
 		cEspecie  := SC5->C5_ESPECI1
-		nFrete    := SC5->C5_TPFRETE				
-		else
+		nFrete    := SC5->C5_TPFRETE
+	else
 		MsgAlert("Pedido não encontrado!","Atenção !!!")
 		lStatus := .F.
 		Return(.F.)
-	endif	
+	endif
 
 Return (.T.)
 //===================================================================================================
@@ -109,7 +109,7 @@ User Function ALTPESO2()
 	if Empty(cpedido)
 		MsgInfo("Digite o número da Pedido.")
 		Return(.F.)
-	endif	
+	endif
 
 	nOpcao := Aviso("Confirmar","Confirma alterações no pedido de venda?", {"Sim","Nao"}, 1, "")
 
@@ -117,7 +117,7 @@ User Function ALTPESO2()
 
 		dbSelectArea("SC5")
 
-		Reclock("SC5", .F.) 
+		Reclock("SC5", .F.)
 		SC5->C5_PBRUTO  := nBruto
 		SC5->C5_PESOL	:= nLiquido
 		SC5->C5_VOLUME1	:= nVolume
