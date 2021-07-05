@@ -31,7 +31,7 @@ User Function ALTPESO()
 	private oEspecie
 	private oFrete
 
-	private cpedido := space(6)
+	private cPedido := space(6)
 	Private dData 	:= stod("")
 	private nBruto 	:= 0
 	private nLiquido:= 0
@@ -45,17 +45,17 @@ User Function ALTPESO()
 //DEFINE MSDIALOG oDlg TITLE "New Dialog" FROM 000, 000  TO 500, 500 COLORS 0, 16777215 PIXEL
 
 	@ 014, 015 SAY oSay1 PROMPT "Pedido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 010, 039 MSGET oPedido VAR cpedido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL	Valid U_ALTPESO1() ==.T.
+	@ 010, 039 MSGET oPedido VAR cPedido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL	Valid U_ALTPESO1() ==.T.
 
 	@ 014, 105 SAY oSay3 PROMPT "Emissao:" SIZE 037, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 010, 133 MSGET oData VAR dData SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL  WHEN .F.
 
 	@ 025, 010 GROUP oGroup1 TO 080, 220 OF oDlg COLOR 0, 16777215 PIXEL
 	@ 035, 015 SAY oSay2 PROMPT "Bruto:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
+	@ 031, 038 MSGET oBruto VAR nBruto SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '9999.999'
 
 	@ 035, 105 SAY oSay3 PROMPT "Liquido:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
-	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
+	@ 031, 133 MSGET oLiquido VAR nLiquido SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '9999.999'
 
 	@ 050, 015 SAY oSay4 PROMPT "Volume:" SIZE 025, 007 OF oDlg COLORS 0, 16777215 PIXEL
 	@ 046, 038 MSGET oVolume VAR nVolume SIZE 060, 010 OF oDlg COLORS 0, 16777215 PIXEL Picture '999.999'
@@ -77,7 +77,7 @@ Return
 //================================================================================= 
 User Function ALTPESO1()
 
-	if Empty(cpedido)
+	if Empty(cPedido)
 		Return(.T.)
 	endif
 
@@ -85,7 +85,7 @@ User Function ALTPESO1()
 	dbSetOrder(1)
 	dbGoTop()
 
-	if (dbSeek("01"+cpedido))
+	if (dbSeek("01"+cPedido))
 		dData	  := SC5->C5_EMISSAO
 		nBruto    := SC5->C5_PBRUTO
 		nLiquido  := SC5->C5_PESOL
@@ -106,7 +106,7 @@ User Function ALTPESO2()
 
 	Local nOpcao	  := 0
 
-	if Empty(cpedido)
+	if Empty(cPedido)
 		MsgInfo("Digite o número da Pedido.")
 		Return(.F.)
 	endif
