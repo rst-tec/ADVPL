@@ -31,8 +31,8 @@ User Function MYTELA
 	oBtn3      := TButton():New( 085,021,"Executar",oGrp3,{||U_xFormula()},037,012,,,,.T.,,"",,,,.F. )
 
 	oGrp4      := TGroup():New( 109,013,137,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
-	oSay4      := TSay():New( 121,065,{||"Informe aqui os dados do seu programa - 4"},oGrp4,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
-	oBtn4      := TButton():New( 117,021,"Executar",oGrp4,{||alert("Botão 04")},037,012,,,,.T.,,"",,,,.F. )
+	oSay4      := TSay():New( 121,065,{||"Programa para alterar dados da Nota fiscal"},oGrp4,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
+	oBtn4      := TButton():New( 117,021,"Executar",oGrp4,{||U_ALTSF2()},037,012,,,,.T.,,"",,,,.F. )
 
 	oGrp5      := TGroup():New( 145,013,173,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
 	oSay5      := TSay():New( 157,065,{||"Informe aqui os dados do seu programa - 5"},oGrp5,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
