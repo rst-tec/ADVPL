@@ -35,8 +35,8 @@ User Function MYTELA
 	oBtn4      := TButton():New( 117,021,"Executar",oGrp4,{||U_ALTSF2()},037,012,,,,.T.,,"",,,,.F. )
 
 	oGrp5      := TGroup():New( 145,013,173,305,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
-	oSay5      := TSay():New( 157,065,{||"Informe aqui os dados do seu programa - 5"},oGrp5,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
-	oBtn5      := TButton():New( 153,021,"Executar",oGrp5,{||alert("Botão 05")},037,012,,,,.T.,,"",,,,.F. )
+	oSay5      := TSay():New( 157,065,{||"Relatório ranking de vendas"},oGrp5,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
+	oBtn5      := TButton():New( 153,021,"Executar",oGrp5,{||U_RELRANK("Botão 05")},037,012,,,,.T.,,"",,,,.F. )
 
 	oGrp6      := TGroup():New( 178,014,206,306,,oDlg1,CLR_BLACK,CLR_WHITE,.T.,.F. )
 	oSay6      := TSay():New( 190,066,{||"Informe aqui os dados do seu programa - 6"},oGrp6,,,.F.,.F.,.F.,.T.,CLR_BLACK,CLR_WHITE,224,008)
