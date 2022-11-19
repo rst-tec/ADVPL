@@ -1,2 +1,2 @@
-# Relátorios em ADVPL para Protheus da Totvs.
+# Customizações em ADVPL para Protheus da Totvs.
 
