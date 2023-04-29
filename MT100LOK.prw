@@ -19,15 +19,18 @@ User Function MT100LOK()
 	Local nProduto := Ascan(aHeader,{|x| AllTrim(x[2]) == "D1_COD"})
 	Local cProduto := AllTrim(Acols[n,nProduto])
 
-	cSaldoSB2 := Posicione("SB2",1,xFilial("SB2")+ cProduto,"B2_QATU")
+	Local nLocal := Ascan(aHeader,{|x| AllTrim(x[2]) == "D1_LOCAL"})
+	Local cLocal := AllTrim(Acols[n,nLocal])
+
+	cSaldoSB2 := Posicione("SB2",1,xFilial("SB2")+cProduto,"B2_QATU") // Quando adiciono o armazem esta passando direto
 
 	IF cValSaldo == 'S'
-
-		IF cSaldoSB2 < 0
-			lRet := .F.
-			Alert("Não está permitido a entrada de produto com saldo negativo. Produto: " + AllTrim(cValToChar(cProduto)) + " - Saldo: "+ cValToChar(cSaldoSB2) + " <MT100LOK>")
+		If !acols[n,Len(aHeader)+1] // Verifica se a linha esta deletada
+			IF cSaldoSB2 < 0
+				lRet := .F.
+				Alert("Não está permitido a entrada de produto com saldo negativo. Produto: " + AllTrim(cValToChar(cProduto)) + " - Armazem: "+ cValToChar(cLocal) + " - Saldo: "+ cValToChar(cSaldoSB2) + " <MT100LOK>")
+			ENDIF
 		ENDIF
-
 	ENDIF
 
 Return lRet
